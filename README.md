@@ -1,7 +1,14 @@
 # bigdata-hadoop
-Hadoop + Spark in Docker containers
+Hadoop in Docker containers
 
 
-docker cp /path/filename hadoop-namenode:/
+Build and run all Docker containers
+```sh
+sh master-build.sh
+```
 
-docker exec -t hadoop-namenode hadoop fs -put filename /
+Run MapReduce tasks
+```sh
+sh hw01-hdfs/job_submit.sh
+```
+

@@ -33,6 +33,11 @@ RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop \
 RUN rm /opt/hadoop-$HADOOP_VERSION/share/hadoop/hdfs/lib/leveldbjni-all-1.8.jar
 COPY leveldbjni-all-1.8.jar /opt/hadoop-$HADOOP_VERSION/share/hadoop/hdfs/lib
 
+RUN apt-get update  \
+    && apt-get install -y python3 python3-pip  \
+    && rm -rf /var/lib/apt/lists/*
+
+
 ADD entrypoint.sh /entrypoint.sh
 
 RUN chmod a+x /entrypoint.sh
