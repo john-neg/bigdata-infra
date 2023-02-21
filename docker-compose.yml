@@ -82,6 +82,8 @@ services:
     container_name: hadoop-historyserver
     restart: always
     build: ./hadoop/historyserver
+    ports:
+      - "8188:8188"
     networks:
      - bigdata-network
     environment:
