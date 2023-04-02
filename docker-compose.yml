@@ -139,7 +139,7 @@ services:
 
   ### JUPYTER
   jupyter-lab:
-    build: ./jupyter
+    build: ./jupyter/lab
     container_name: jupyter-lab
     ports:
       - 8888:8888
