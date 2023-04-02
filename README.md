@@ -7,10 +7,11 @@ Build and run all Docker containers
 sh master-build.sh
 ```
 
-Run MapReduce tasks
+To upload data to HDFS put content to /hdfs_upload/upload folder and run
 ```sh
-sh hw01-hdfs/job_submit.sh
+sh hdfs_upload.sh
 ```
+
 # Links
 
 Jupyter Lab - http://localhost:8888

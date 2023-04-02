@@ -2,7 +2,7 @@ FROM python:3.10
 
 ARG SPARK_VERSION="3.3.2"
 ARG JUPYTERLAB_VERSION="3.6.2"
-ARG SCIKIT_LEARN_VERSION="1.2.0"
+#ARG SCIKIT_LEARN_VERSION="1.2.0"
 
 ENV SHARED_WORKSPACE /opt/workspace
 RUN mkdir -p $SHARED_WORKSPACE/data
@@ -17,15 +17,9 @@ CMD ["bash"]
 
 COPY workspace/ $SHARED_WORKSPACE
 
-RUN pip3 install wget pyspark==${SPARK_VERSION} jupyterlab==${JUPYTERLAB_VERSION}
-RUN pip3 install pandas
-RUN pip3 install numpy
-RUN pip3 install scipy
-RUN pip3 install scikit-learn==${SCIKIT_LEARN_VERSION}
-#RUN pip3 install scikit-spark
-RUN pip3 install -U matplotlib
-RUN pip3 install -U joblibspark
-RUN pip3 list
+RUN pip3 install -U wget pyspark==${SPARK_VERSION} jupyterlab==${JUPYTERLAB_VERSION} \
+                    pandas numpy scipy seaborn matplotlib requests \
+                    joblibspark scikit-learn
 
 EXPOSE 8888
 
