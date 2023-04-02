@@ -1,4 +1,4 @@
-docker cp mapred/. hadoop-namenode:/jobs/
+hdfs dfsadmin -reportdocker cp mapred/. hadoop-namenode:/jobs/
 docker cp AB_NYC_2019.csv hadoop-namenode:/
 
 docker exec -t hadoop-namenode hadoop fs -put -f AB_NYC_2019.csv /

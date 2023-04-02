@@ -2,7 +2,7 @@ FROM openjdk:11-jre-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ENV HADOOP_VERSION=3.3.4
+ENV HADOOP_VERSION=3.3.5
 ENV HADOOP_URL=https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz \
     HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION \
     HADOOP_CONF_DIR=/etc/hadoop \
@@ -11,7 +11,7 @@ ENV HADOOP_URL=https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-$
 ENV PATH=$HADOOP_HOME/bin/:$PATH
 
 RUN apt-get update  \
-    && apt-get install -y apt-utils curl gnupg netcat procps  \
+    && apt-get install -y apt-utils curl gnupg netcat python3 python3-pip procps  \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://dist.apache.org/repos/dist/release/hadoop/common/KEYS
@@ -26,17 +26,11 @@ RUN set -x \
     && rm /tmp/hadoop.tar.gz*
 
 RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop \
-    && mkdir /opt/hadoop-$HADOOP_VERSION/logs \
-    && mkdir /hadoop-data
+    && mkdir /opt/hadoop-$HADOOP_VERSION/logs
 
 # Fix arm64 start issue
 RUN rm /opt/hadoop-$HADOOP_VERSION/share/hadoop/hdfs/lib/leveldbjni-all-1.8.jar
 COPY leveldbjni-all-1.8.jar /opt/hadoop-$HADOOP_VERSION/share/hadoop/hdfs/lib
-
-RUN apt-get update  \
-    && apt-get install -y python3 python3-pip  \
-    && rm -rf /var/lib/apt/lists/*
-
 
 ADD entrypoint.sh /entrypoint.sh
 
